@@ -9,6 +9,8 @@ import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class TcpClient {
 
@@ -21,6 +23,7 @@ public class TcpClient {
 
     private Consumer<String> success;
     private Consumer<String> error;
+    private final Executor mExecutor;
 
     public TcpClient(String ip, int port) {
         // TODO Auto-generated constructor stub
@@ -29,6 +32,7 @@ public class TcpClient {
         }
         mIp = ip;
         mPort = port;
+        mExecutor = Executors.newSingleThreadExecutor();
     }
 
     /**
@@ -54,44 +58,49 @@ public class TcpClient {
      * @param msg 消息内容
      */
     public void sendMsg(final String msg) {
-        new Thread(() -> {
-            try {
-                if (socket == null || !socket.isConnected()) {
-                    socket = new Socket(mIp, mPort);
-                    bwrite = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), "utf-8"));
-                    bread = new BufferedReader(new InputStreamReader(socket.getInputStream(), "utf-8"));
-                }
+        mExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
 
-                Log.d(TAG, "run: write length=" + msg.length());
-                bwrite.write(msg + "#eof#");
-                bwrite.flush();
-
-                char[] buffer = new char[1024];
-                int read;
-                StringBuilder stringBuffer = new StringBuilder();
-                while ((read = bread.read(buffer)) != -1) {
-                    stringBuffer.append(buffer, 0, read);
-                    if (stringBuffer.toString().contains("#eof#")) {
-                        break;
+                try {
+                    if (socket == null || !socket.isConnected()) {
+                        socket = new Socket(mIp, mPort);
+                        bwrite = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), "utf-8"));
+                        bread = new BufferedReader(new InputStreamReader(socket.getInputStream(), "utf-8"));
                     }
-                }
-                String result = stringBuffer.toString();
-                if (result.length() >= 5) {
-                    result = result.substring(0, result.length() - 5);
-                }
-                Log.d(TAG, "run: receive length=" + result.length());
 
-                if (success != null) {
-                    success.accept(result);
+                    Log.d(TAG, "run: write length=" + msg.length());
+                    bwrite.write(msg + "#eof#");
+                    bwrite.flush();
+
+                    char[] buffer = new char[1024];
+                    int read;
+                    StringBuilder stringBuffer = new StringBuilder();
+                    while ((read = bread.read(buffer)) != -1) {
+                        stringBuffer.append(buffer, 0, read);
+                        if (stringBuffer.toString().contains("#eof#")) {
+                            break;
+                        }
+                    }
+                    String result = stringBuffer.toString();
+                    if (result.length() >= 5) {
+                        result = result.substring(0, result.length() - 5);
+                    }
+                    Log.d(TAG, "run: receive length=" + result.length());
+
+                    if (success != null) {
+                        success.accept(result);
+                    }
+                } catch (Exception e) {
+                    // TODO: handle exception
+                    if (error != null) {
+                        error.accept("TCP client error");
+                    }
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                // TODO: handle exception
-                if (error != null) {
-                    error.accept("TCP client error");
-                }
-                e.printStackTrace();
+
             }
-        }).start();
+        });
     }
 
 }

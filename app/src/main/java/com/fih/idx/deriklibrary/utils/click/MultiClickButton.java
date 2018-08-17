@@ -2,17 +2,16 @@ package com.fih.idx.deriklibrary.utils.click;
 
 import android.content.Context;
 import android.os.SystemClock;
-import android.support.annotation.IntDef;
-import android.support.annotation.MainThread;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.Button;
 
 /**
  * Created by derik on 18-3-21.
  * Email: weilai0314@163.com
  */
 
-public class MultiClickButton extends android.support.v7.widget.AppCompatButton {
+public class MultiClickButton extends Button {
     private static long millis = 700;//毫秒
 
     public void setOnDoubleClickListener(OnDoubleClickListener listener) {

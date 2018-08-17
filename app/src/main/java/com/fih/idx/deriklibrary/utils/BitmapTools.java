@@ -3,8 +3,8 @@ package com.fih.idx.deriklibrary.utils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v4.util.LruCache;
 import android.util.Log;
+import android.util.LruCache;
 
 import java.io.InputStream;
 import java.lang.ref.SoftReference;

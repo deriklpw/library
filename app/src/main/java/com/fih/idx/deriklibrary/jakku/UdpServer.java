@@ -8,6 +8,8 @@ import com.fih.idx.deriklibrary.custom.Consumer;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 /**
  * Created by derik on 18-5-18.
@@ -42,6 +44,11 @@ public class UdpServer {
     private BiConsumer<String, String> success;
     private Consumer<String> error;
     private boolean isRunning = false;
+
+    /**
+     * 用于消息发送，避免多次创建线程
+     */
+    private final Executor mExecutor = Executors.newSingleThreadExecutor();
 
     /**
      * 构造一个UDP Server。sendIp和receiveIp不能相同
@@ -95,17 +102,21 @@ public class UdpServer {
      */
     public void sendMsg(final String msg) {
         if (isRunning && msg != null) {
-            new Thread(() -> {
-                try {
-                    DatagramPacket packet;
-                    byte data[] = msg.getBytes("utf-8");
-                    packet = new DatagramPacket(data, data.length, toGroup, port);
-                    sendSocket.send(packet);
-                    Log.d(TAG, "run: send by udp, msg=" + msg);
-                } catch (Exception e) {
-                    e.printStackTrace();
+            mExecutor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        DatagramPacket packet;
+                        byte data[] = msg.getBytes("utf-8");
+                        packet = new DatagramPacket(data, data.length, toGroup, port);
+                        sendSocket.send(packet);
+                        Log.d(TAG, "run: send by udp, msg=" + msg);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
                 }
-            }).start();
+            });
         }
     }
 

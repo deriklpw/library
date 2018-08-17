@@ -21,7 +21,5 @@ public abstract class NoDoubleClickListener implements View.OnClickListener {
 
     }
 
-    public void OnNoDoubleClick(View v) {
-
-    }
+    public abstract void OnNoDoubleClick(View v);
 }

@@ -2,7 +2,6 @@ package com.fih.idx.deriklibrary.utils;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.NonNull;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -26,7 +25,7 @@ public class AppExecutors {
     }
 
     public AppExecutors(){
-        this(new DiskIOThreadExecutor(),
+        this(Executors.newSingleThreadExecutor(),
                 Executors.newFixedThreadPool(THREAD_COUNT),
                 new MainThreadExecutor());
     }
@@ -60,7 +59,10 @@ public class AppExecutors {
 
         private Handler handler = new Handler(Looper.getMainLooper());
         @Override
-        public void execute(@NonNull Runnable runnable) {
+        public void execute(Runnable runnable) {
+            if (runnable == null) {
+                throw new IllegalArgumentException("Illegal argument.");
+            }
             handler.post(runnable);
         }
     }
