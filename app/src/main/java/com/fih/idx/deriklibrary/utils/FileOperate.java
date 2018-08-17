@@ -1,7 +1,5 @@
 package com.fih.idx.deriklibrary.utils;
 
-import android.util.Log;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,10 +28,9 @@ public class FileOperate {
 
         if (files != null && files.length > 0) {
             list = new ArrayList<>();
-            for (int i = 0; i < files.length; i++) {
-                File f = files[i];
+            for (File f : files) {
                 if (f.isDirectory() && listChild) {
-                    getFiles(f, listChild);
+                    getFiles(f, true);
                 } else {
                     list.add(f.getAbsolutePath());
                 }
@@ -53,12 +50,7 @@ public class FileOperate {
     public static boolean compare(File localFile, File tarFile) {
         String cmpFileMD5 = FileDigest.getFileMD5(localFile);
         String tarFileMD5 = FileDigest.getFileMD5(tarFile);
-        if (cmpFileMD5 != null && tarFileMD5 != null) {
-            if (cmpFileMD5.equals(tarFileMD5)) {
-                return true;
-            }
-        }
-        return false;
+        return cmpFileMD5 != null && tarFileMD5 != null && cmpFileMD5.equals(tarFileMD5);
     }
 
     /**
@@ -102,7 +94,6 @@ public class FileOperate {
             } catch (IOException e) {
                 e.printStackTrace();
                 Log.e("File", "Create failed:" + targetFile.getAbsolutePath());
-                return null;
             }
 
             return targetFile;

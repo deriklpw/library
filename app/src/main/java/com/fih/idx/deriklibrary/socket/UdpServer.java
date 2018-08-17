@@ -1,9 +1,8 @@
-package com.fih.idx.deriklibrary.jakku;
-
-import android.util.Log;
+package com.fih.idx.deriklibrary.socket;
 
 import com.fih.idx.deriklibrary.custom.BiConsumer;
 import com.fih.idx.deriklibrary.custom.Consumer;
+import com.fih.idx.deriklibrary.utils.Log;
 
 import java.net.DatagramPacket;
 import java.net.InetAddress;
@@ -79,7 +78,7 @@ public class UdpServer {
     /**
      * 设置监听器，接收的UDP广播信息，将在其中响应。
      *
-     * @param success
+     * @param success 成功回调接口
      */
     public void setDataListener(BiConsumer<String, String> success, Consumer<String> error) {
         this.success = success;
@@ -89,7 +88,7 @@ public class UdpServer {
     /**
      * 设置监听器，接收的UDP广播信息，只响应成功时的消息。
      *
-     * @param success
+     * @param success 成功回调接口
      */
     public void setDataListener(BiConsumer<String, String> success) {
         this.success = success;
@@ -142,7 +141,7 @@ public class UdpServer {
     /**
      * 返回当前UDP Server的状态
      *
-     * @return
+     * @return boolean. true，正在运行，false，未运行
      */
     public boolean isRunning() {
         return isRunning;

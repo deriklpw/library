@@ -2,70 +2,92 @@ package com.fih.idx.deriklibrary.utils;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class FileDigest {
 
+    /**
+     * 获取一串字符的MD5值
+     *
+     * @param text 字符串，用于生成MD5值
+     * @return String
+     */
+    public static String getStringMD5(String text) {
+        String result = null;
+        try {
+            byte[] data = MessageDigest.getInstance("MD5").digest(text.getBytes("UTF-8"));
 
-    public static String getMD5(String text){
-        StringBuffer buffer = new StringBuffer();
+            result = new BigInteger(1, data).toString(16);
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        return buffer.toString();
+        return result;
     }
 
     /**
-     * 获取单个文件的MD5值！
+     * 获取单个文件的MD5值
      *
-     * @param file
-     * @return
+     * @param file 文件，用于产生MD5值
+     * @return String
      */
     public static String getFileMD5(File file) {
+        String result = null;
         if (!file.isFile()) {
             return null;
         }
-        MessageDigest digest;
-        FileInputStream in;
-        byte buffer[] = new byte[1024];
-        int len;
+        MessageDigest digest = null;
+        FileInputStream in = null;
+        byte buffer[] = new byte[2048];
+        int read;
         try {
             digest = MessageDigest.getInstance("MD5");
             in = new FileInputStream(file);
-            while ((len = in.read(buffer, 0, 1024)) != -1) {
-                digest.update(buffer, 0, len);
+            while ((read = in.read(buffer, 0, 1024)) > 0) {
+                digest.update(buffer, 0, read);
             }
-            in.close();
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+        } finally {
+            try {
+                if (in != null) {
+                    in.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        BigInteger bigInt = new BigInteger(1, digest.digest());
-        return bigInt.toString(16);
+
+        if (digest != null) {
+            result = new BigInteger(1, digest.digest()).toString(16); //16进制
+        }
+        return result;
     }
 
     /**
      * 获取文件夹中文件的MD5值
      *
-     * @param file
-     * @param listChild ;true递归子目录中的文件
-     * @return
+     * @param dir 目录
+     * @param listChild true递归其子目录中的文件
+     * @return Map/<String, String/>
      */
-    public static Map<String, String> getDirMD5(File file, boolean listChild) {
-        if (!file.isDirectory()) {
+    public static Map<String, String> getDirMD5(File dir, boolean listChild) {
+        if (!dir.isDirectory()) {
             return null;
         }
-        //<filepath,md5>
         Map<String, String> map = new HashMap<>();
         String md5;
-        File files[] = file.listFiles();
+        File files[] = dir.listFiles();
         if (files != null && files.length > 0) {
-            for (int i = 0; i < files.length; i++) {
-                File f = files[i];
+            for (File f : files) {
                 if (f.isDirectory() && listChild) {
-                    map.putAll(getDirMD5(f, listChild));
+                    map.putAll(getDirMD5(f, true));
                 } else {
                     md5 = getFileMD5(f);
                     if (md5 != null) {
@@ -74,8 +96,6 @@ public class FileDigest {
                 }
             }
         }
-
         return map;
     }
-
 }

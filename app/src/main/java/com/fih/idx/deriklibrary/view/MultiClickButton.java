@@ -1,4 +1,4 @@
-package com.fih.idx.deriklibrary.utils.click;
+package com.fih.idx.deriklibrary.view;
 
 import android.content.Context;
 import android.os.SystemClock;

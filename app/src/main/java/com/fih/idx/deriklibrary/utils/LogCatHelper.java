@@ -25,9 +25,9 @@ public class LogCatHelper {
     public static boolean needRunLogThread = false;
 
     /**
-     * @param mContext
+     * @param mContext 上下文
      * @param path     log日志保存根目录
-     * @return
+     * @return LogCatHelper
      */
     public static LogCatHelper getInstance(Context mContext, String path) {
         if (instance == null) {

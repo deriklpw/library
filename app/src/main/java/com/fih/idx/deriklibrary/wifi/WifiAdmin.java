@@ -7,7 +7,8 @@ import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.text.TextUtils;
-import android.util.Log;
+
+import com.fih.idx.deriklibrary.utils.Log;
 
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class WifiAdmin {
 
     // 构造函数
     public WifiAdmin(Context context) {
-        wifiManager = (WifiManager) context.getSystemService(context.WIFI_SERVICE);
+        wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
     }
 
     // 提供一个外部接口，传入要连接的无线网
@@ -128,6 +129,7 @@ public class WifiAdmin {
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException ie) {
+                        ie.printStackTrace();
                     }
                 }
 
@@ -165,11 +167,8 @@ public class WifiAdmin {
         final int len = wepKey.length();
 
         // WEP-40, WEP-104, and some vendors using 256-bit WEP (WEP-232?)
-        if (len != 10 && len != 26 && len != 58) {
-            return false;
-        }
+        return (len == 10 || len == 26 || len == 58) && isHex(wepKey);
 
-        return isHex(wepKey);
     }
 
     private static boolean isHex(String key) {
@@ -187,7 +186,7 @@ public class WifiAdmin {
 
 
     // 打开wifi功能
-    synchronized public boolean openWifi() {
+    public synchronized boolean openWifi() {
         boolean result = true;
         if (!wifiManager.isWifiEnabled()) {
             result = wifiManager.setWifiEnabled(true);

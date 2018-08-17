@@ -1,4 +1,4 @@
-package com.fih.idx.deriklibrary.utils;
+package com.fih.idx.deriklibrary.view;
 
 import android.view.View;
 

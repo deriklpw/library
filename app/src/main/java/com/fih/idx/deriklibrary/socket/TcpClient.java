@@ -1,8 +1,7 @@
-package com.fih.idx.deriklibrary.jakku;
-
-import android.util.Log;
+package com.fih.idx.deriklibrary.socket;
 
 import com.fih.idx.deriklibrary.custom.Consumer;
+import com.fih.idx.deriklibrary.utils.Log;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

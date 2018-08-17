@@ -3,7 +3,6 @@ package com.fih.idx.deriklibrary.utils;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.Log;
 
 import com.fih.idx.deriklibrary.view.MsgToast;
 
@@ -14,7 +13,7 @@ import java.net.URL;
  * Created by derik on 17-2-15.
  */
 
-public class DetectNetWork {
+public class DetectNetwork {
 
     /**
      * 功能：检测url是否接收请求
@@ -24,7 +23,7 @@ public class DetectNetWork {
      * @param url 指定url
      * @param callback true url可用，false url不可用
      */
-    public static void detect(Context ctx, String url, Callback callback) {
+    public synchronized static void detect(Context ctx, String url, Callback callback) {
         if (url == null || url.equals("")) {
             throw new IllegalArgumentException("Illegal argument");
         }
@@ -37,8 +36,8 @@ public class DetectNetWork {
 
     /**
      * 判断网路状态
-     * @param context
-     * @return
+     * @param context 上下文
+     * @return true，可用。false，不可用
      */
     public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivity = (ConnectivityManager) context
@@ -58,10 +57,10 @@ public class DetectNetWork {
 
     /**
      * 连接指定的url
-     * @param urlStr
-     * @param callback
+     * @param urlStr 指定url
+     * @param callback 回调方法
      */
-    private synchronized static void connect(final String urlStr, Callback callback) {
+    private synchronized static void connect(final String urlStr, final Callback callback) {
         new Thread() {
             int state = -1;
             int counts = 0;
