@@ -30,12 +30,15 @@ android {
 }
 
 dependencies {
-//    implementation fileTree(include: ['*.jar'], dir: 'libs')
-//    implementation "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
-//    implementation "com.android.support.constraint:constraint-layout:$rootProject.ext.layoutVersion"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
+    implementation "com.android.support.constraint:constraint-layout:$rootProject.ext.layoutVersion"
+    androidTestCompile("com.android.support.test.espresso:espresso-core:$rootProject.ext.espressoVersion", {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
     // Dependencies for local unit tests
     // Required -- JUnit 4 framework，用于单元测试，google官方推荐
-//    testImplementation "junit:junit:$rootProject.junitVersion"
+    testImplementation "junit:junit:$rootProject.junitVersion"
 }
 
 // 指定编码
