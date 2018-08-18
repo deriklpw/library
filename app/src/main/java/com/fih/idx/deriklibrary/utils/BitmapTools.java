@@ -204,6 +204,7 @@ public class BitmapTools {
      * @param source original bitmap source
      * @param width targeted width
      * @param height targeted height
+     * @return Bitmap
      */
     public Bitmap extractThumbnail(Bitmap source, int width, int height) {
         // 指定较小，则缩小；较大则放大。其实质结合了BitmapFactory和Matrix
@@ -391,6 +392,7 @@ public class BitmapTools {
      * 弱引用作缓存之存
      *
      * @param key 弱引用对象将会存在一个HashMap中，key为对应的键。
+     * @param bitmap 待存储图片
      */
     public void putBitmapToWeakRef(String key, Bitmap bitmap) {
         try {
@@ -428,6 +430,7 @@ public class BitmapTools {
 
     /**
      * 使用完后复制使用此段代码，recycle bitmap
+     * @param bitmap 待回收照片
      */
     public void recycle(Bitmap bitmap) {
         // 先判断是否已经回收

@@ -16,7 +16,7 @@ public class FileOperate {
      *
      * @param dir       文件目录
      * @param listChild 是否遍历子目录
-     * @return List<filePath>
+     * @return List 装有所有文件的集合
      */
     public static List<String> getFiles(File dir, boolean listChild) {
         if (!dir.isDirectory()) {
@@ -39,7 +39,6 @@ public class FileOperate {
         return list;
     }
 
-
     /**
      * 功能：单个文件比较
      *
@@ -57,6 +56,7 @@ public class FileOperate {
      * 功能：指定路径下，建立文件
      * @param path     存储目录的路径
      * @param fileName 存储文件名
+     * @return File 新建的文件
      */
     public static File prepareFile(final String path, final String fileName) {
 

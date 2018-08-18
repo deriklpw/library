@@ -75,7 +75,7 @@ public class FileDigest {
      *
      * @param dir 目录
      * @param listChild true递归其子目录中的文件
-     * @return Map/<String, String/>
+     * @return Map 存储所有文件MD5值的哈希表
      */
     public static Map<String, String> getDirMD5(File dir, boolean listChild) {
         if (!dir.isDirectory()) {

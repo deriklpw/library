@@ -11,11 +11,7 @@ import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 
 /**
- * @author Administrator
- * <p>
  * log打印日志保存,文件的保存以小时为单位
- * permission:<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
- * <uses-permission android:name="android.permission.READ_LOGS" />
  */
 public class LogCatHelper {
     private static LogCatHelper instance = null;

@@ -20,7 +20,7 @@ public class AuthInfo {
 
     /**
      * Get the values of specify names
-     * @param context
+     * @param context 上下文
      * @param metaNameAppId app id name in AndroidManifest.xml
      * @param metaNameAppKey app key name in AndroidManifest.xml
      * @param metaNameAppSecret app secret name in AndroidManifest.xml
