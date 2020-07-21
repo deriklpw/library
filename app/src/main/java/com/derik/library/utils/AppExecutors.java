@@ -18,13 +18,13 @@ public class AppExecutors {
     private Executor mNetworkIO;
     private Executor mMainThread;
 
-    AppExecutors(Executor diskIO, Executor networkIO, Executor mainThread){
+    AppExecutors(Executor diskIO, Executor networkIO, Executor mainThread) {
         mDiskIO = diskIO;
         mNetworkIO = networkIO;
         mMainThread = mainThread;
     }
 
-    public AppExecutors(){
+    public AppExecutors() {
         this(Executors.newSingleThreadExecutor(),
                 Executors.newFixedThreadPool(THREAD_COUNT),
                 new MainThreadExecutor());
@@ -32,7 +32,6 @@ public class AppExecutors {
 
 
     /**
-     *
      * @return executor for DiskIO operate
      */
     public Executor getDiskIO() {
@@ -40,7 +39,6 @@ public class AppExecutors {
     }
 
     /**
-     *
      * @return executor for NetworkIO operate
      */
     public Executor getNetworkIO() {
@@ -48,7 +46,6 @@ public class AppExecutors {
     }
 
     /**
-     *
      * @return executor for MainThread operate
      */
     public Executor getMainThread() {
@@ -58,6 +55,7 @@ public class AppExecutors {
     private static class MainThreadExecutor implements Executor {
 
         private Handler handler = new Handler(Looper.getMainLooper());
+
         @Override
         public void execute(Runnable runnable) {
             if (runnable == null) {

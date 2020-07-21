@@ -36,19 +36,21 @@ public class TcpServer implements Runnable {
 
     /**
      * 数据监听器
+     *
      * @param success 成功时，函数式接口
-     * @param error 错误时，函数式接口
+     * @param error   错误时，函数式接口
      */
-    public void setDataListener(Consumer<String> success, Consumer<String> error){
+    public void setDataListener(Consumer<String> success, Consumer<String> error) {
         this.successListener = success;
         this.errorListener = error;
     }
 
     /**
      * 数据监听器
+     *
      * @param success 成功时，函数式接口
      */
-    public void setDataListener(Consumer<String> success){
+    public void setDataListener(Consumer<String> success) {
         this.successListener = success;
     }
 
@@ -81,6 +83,7 @@ public class TcpServer implements Runnable {
 
     /**
      * 开启TCP服务，如果已经开启，不进行处理
+     *
      * @param actionListener 状态监听器，开启成功后，将对应信息返回给接口方法
      */
     public void startServer(BiConsumer<String, Integer> actionListener) {

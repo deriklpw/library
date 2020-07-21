@@ -17,7 +17,7 @@ public class MathTool {
         return (int) (Math.random() * value);
     }
 
-    public static int[] randomValues (int range, int number) {
+    public static int[] randomValues(int range, int number) {
 
         if (range <= 0 || number <= 0) {
             throw new IllegalArgumentException("参数错误，范围或个数不能小于0");

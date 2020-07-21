@@ -4,14 +4,13 @@ import android.content.Context;
 import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.Button;
 
 /**
  * Created by derik on 18-3-21.
  * Email: weilai0314@163.com
  */
 
-public class MultiClickButton extends Button {
+public class MultiClickButton extends androidx.appcompat.widget.AppCompatButton {
     private static long millis = 700;//毫秒
 
     public void setOnDoubleClickListener(OnDoubleClickListener listener) {

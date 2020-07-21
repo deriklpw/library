@@ -19,8 +19,8 @@ public class DetectNetwork {
      * 功能：检测url是否接收请求
      * 描述：先检测网络是否可用，再和指定的url建立连接，依据不同结果发送消息给主线程处理
      *
-     * @param ctx 上下文
-     * @param url 指定url
+     * @param ctx      上下文
+     * @param url      指定url
      * @param callback true url可用，false url不可用
      */
     public synchronized static void detect(Context ctx, String url, Callback callback) {
@@ -36,6 +36,7 @@ public class DetectNetwork {
 
     /**
      * 判断网路状态
+     *
      * @param context 上下文
      * @return true，可用。false，不可用
      */
@@ -54,7 +55,8 @@ public class DetectNetwork {
 
     /**
      * 连接指定的url
-     * @param urlStr 指定url
+     *
+     * @param urlStr   指定url
      * @param callback 回调方法
      */
     private synchronized static void connect(final String urlStr, final Callback callback) {

@@ -39,7 +39,7 @@ public class BitmapTools {
     private static final int mThreadNum = 2;
     private ExecutorService mFixedThreadExecutor;
 
-    private BitmapTools(){
+    private BitmapTools() {
 
     }
 
@@ -131,10 +131,11 @@ public class BitmapTools {
 
     /**
      * 使Bitmap缩小为原来的inSampleSize分之一，降低使用内存
-     * @param context 上下文
-     * @param resId 图片的资源ID
-     * @param config 对应的配置
-     * @param reqWidth 设定的宽度
+     *
+     * @param context   上下文
+     * @param resId     图片的资源ID
+     * @param config    对应的配置
+     * @param reqWidth  设定的宽度
      * @param reqHeight 设定的高度
      * @return Bitmap
      */
@@ -167,7 +168,7 @@ public class BitmapTools {
      *
      * @param context   上下文
      * @param is        图片的数据流
-     * @param config 对应的配置
+     * @param config    对应的配置
      * @param reqWidth  设定的宽度
      * @param reqHeight 设定的高度
      * @return Bitmap 返回一个bitmap实例
@@ -202,7 +203,7 @@ public class BitmapTools {
      * Creates a centered bitmap of the desired size.
      *
      * @param source original bitmap source
-     * @param width targeted width
+     * @param width  targeted width
      * @param height targeted height
      * @return Bitmap
      */
@@ -391,7 +392,7 @@ public class BitmapTools {
     /**
      * 弱引用作缓存之存
      *
-     * @param key 弱引用对象将会存在一个HashMap中，key为对应的键。
+     * @param key    弱引用对象将会存在一个HashMap中，key为对应的键。
      * @param bitmap 待存储图片
      */
     public void putBitmapToWeakRef(String key, Bitmap bitmap) {
@@ -430,6 +431,7 @@ public class BitmapTools {
 
     /**
      * 使用完后复制使用此段代码，recycle bitmap
+     *
      * @param bitmap 待回收照片
      */
     public void recycle(Bitmap bitmap) {

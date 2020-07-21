@@ -73,7 +73,7 @@ public class FileDigest {
     /**
      * 获取文件夹中文件的MD5值
      *
-     * @param dir 目录
+     * @param dir       目录
      * @param listChild true递归其子目录中的文件
      * @return Map 存储所有文件MD5值的哈希表
      */

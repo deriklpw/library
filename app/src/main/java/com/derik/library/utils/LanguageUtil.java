@@ -30,10 +30,11 @@ public class LanguageUtil {
 
     /**
      * 是否是英文
+     *
      * @param charaString 指定文字
      * @return true，是英文，false，不是英文
      */
-    public static boolean isEnglish(String charaString){
+    public static boolean isEnglish(String charaString) {
 
         return charaString.matches("^[a-zA-Z]*");
 
@@ -41,10 +42,11 @@ public class LanguageUtil {
 
     /**
      * 是否是中文
+     *
      * @param str 指定文字
      * @return true，是中文，false，不是中文
      */
-    public static boolean isChinese(String str){
+    public static boolean isChinese(String str) {
 
         String regEx = "[\\u4e00-\\u9fa5]+";
 

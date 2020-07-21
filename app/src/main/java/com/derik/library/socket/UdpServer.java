@@ -79,7 +79,7 @@ public class UdpServer {
      * 设置监听器，接收的UDP广播信息，将在其中响应。
      *
      * @param success 成功回调接口
-     * @param error 错误回调接口
+     * @param error   错误回调接口
      */
     public void setDataListener(BiConsumer<String, String> success, Consumer<String> error) {
         this.success = success;

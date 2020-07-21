@@ -9,7 +9,7 @@ import java.util.List;
  * Created by derik on 17-2-28.
  */
 
-public class FileOperate {
+public class FileUtils {
 
     /**
      * 功能：遍历目录，获取文件
@@ -54,6 +54,7 @@ public class FileOperate {
 
     /**
      * 功能：指定路径下，建立文件
+     *
      * @param path     存储目录的路径
      * @param fileName 存储文件名
      * @return File 新建的文件

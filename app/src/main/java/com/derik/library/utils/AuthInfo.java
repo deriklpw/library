@@ -8,10 +8,6 @@ import android.widget.Toast;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by fujiayi on 2017/6/24.
- */
-
 public class AuthInfo {
 
     private static HashMap<String, Object> authInfo;
@@ -20,9 +16,10 @@ public class AuthInfo {
 
     /**
      * Get the values of specify names
-     * @param context 上下文
-     * @param metaNameAppId app id name in AndroidManifest.xml
-     * @param metaNameAppKey app key name in AndroidManifest.xml
+     *
+     * @param context           上下文
+     * @param metaNameAppId     app id name in AndroidManifest.xml
+     * @param metaNameAppKey    app key name in AndroidManifest.xml
      * @param metaNameAppSecret app secret name in AndroidManifest.xml
      * @return Map, the key is the name, the value is the value of specify name in AndroidManifest.xml
      */

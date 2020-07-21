@@ -36,24 +36,27 @@ public class TcpClient {
 
     /**
      * 设置数据监听器
+     *
      * @param success 成功的函数式接口
-     * @param error 错误的函数式接口
+     * @param error   错误的函数式接口
      */
-    public void setDataListener(Consumer<String> success,Consumer<String> error){
+    public void setDataListener(Consumer<String> success, Consumer<String> error) {
         this.success = success;
         this.error = error;
     }
 
     /**
      * 设置数据监听器
+     *
      * @param success 成功的函数式接口
      */
-    public void setDataListener(Consumer<String> success){
+    public void setDataListener(Consumer<String> success) {
         this.success = success;
     }
 
     /**
      * 发送一条TCP消息
+     *
      * @param msg 消息内容
      */
     public void sendMsg(final String msg) {

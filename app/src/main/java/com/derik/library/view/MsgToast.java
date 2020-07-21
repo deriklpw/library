@@ -17,8 +17,8 @@ public final class MsgToast {
         mToast.show();
     }
 
-    public static void destroy(){
-        if (mToast != null){
+    public static void destroy() {
+        if (mToast != null) {
             mToast.cancel();
             mToast = null;
         }
