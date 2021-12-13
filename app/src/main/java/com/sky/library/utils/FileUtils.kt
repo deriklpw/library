@@ -2,9 +2,6 @@ package com.sky.library.utils
 
 import java.io.File
 import java.io.IOException
-import java.io.RandomAccessFile
-import java.lang.Exception
-import java.nio.ByteBuffer
 import java.util.ArrayList
 
 /**
@@ -132,22 +129,5 @@ object FileUtils {
             }
         }
         return null
-    }
-
-    @JvmStatic
-    fun writeStringToFile(targetFile: File, msg: String) {
-        if (targetFile.exists()) {
-            try {
-                val rf = RandomAccessFile(targetFile, "rw")
-                val channel = rf.channel
-                val position = rf.length()
-                rf.seek(position)
-                channel.write(ByteBuffer.wrap(msg.toByteArray()))
-                channel.close()
-                rf.close()
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
     }
 }

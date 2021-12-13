@@ -275,7 +275,7 @@ class SettingItemView(context: Context, attrs: AttributeSet?, defStyleAttr: Int,
         sw?.setOnCheckedChangeListener(listener)
     }
 
-    private fun parseTintMode(value: Int, defaultMode: PorterDuff.Mode?): PorterDuff.Mode? {
+    private fun parseTintMode(value: Int, defaultMode: PorterDuff.Mode): PorterDuff.Mode {
         return when (value) {
             3 -> PorterDuff.Mode.SRC_OVER
             5 -> PorterDuff.Mode.SRC_IN
