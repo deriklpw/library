@@ -5,7 +5,7 @@ plugins {
     id 'com.github.dcendents.android-maven'
 }
 
-group = 'com.github.sky'
+group = 'com.github.deriklpw'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
