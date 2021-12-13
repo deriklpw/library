@@ -8,14 +8,13 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class LinearItemDivider extends RecyclerView.ItemDecoration {
     private static final String TAG = "LinearItemDivider";
 
     //默认分割线宽
-    private int mDividerWidth;
+    private final int mDividerWidth;
 
     //最顶部分隔宽度
     private int mTopWidth = 0;
@@ -59,12 +58,19 @@ public class LinearItemDivider extends RecyclerView.ItemDecoration {
         this(dividerWidth, color, false);
     }
 
-    public LinearItemDivider(int dividerWidth, int color, boolean mUseBgMode) {
+    public LinearItemDivider(int dividerWidth, int color, boolean bottomLineEnable) {
+        this(dividerWidth, color, false, bottomLineEnable);
+    }
+
+    public LinearItemDivider(int dividerWidth, int color, boolean mUseBgMode, boolean bottomLineEnable) {
         this.mDividerWidth = dividerWidth;
         this.mUseBgMode = mUseBgMode;
 
         mPaint = new Paint();
         mPaint.setColor(color);
+        if (bottomLineEnable) {
+            mBottomWidth = dividerWidth;
+        }
     }
 
     public void setExcludePositions(int[] excludePositions) {

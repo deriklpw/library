@@ -30,10 +30,10 @@ public abstract class CustomBaseAdapter<T> extends RecyclerView.Adapter<Recycler
 
     public static final int VIEW_TYPE_ITEM = 0x10000002;
 
-    private List<T> mList;
+    private final List<T> mList;
 
     @LayoutRes
-    private int mLayoutId;
+    private final int mLayoutId;
 
     protected Context mAdapterContext;
 

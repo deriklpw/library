@@ -14,9 +14,9 @@ import java.util.concurrent.Executors;
  */
 public class AppExecutors {
     private static final int THREAD_COUNT = 3;
-    private Executor mDiskIO;
-    private Executor mNetworkIO;
-    private Executor mMainThread;
+    private final Executor mDiskIO;
+    private final Executor mNetworkIO;
+    private final Executor mMainThread;
 
     AppExecutors(Executor diskIO, Executor networkIO, Executor mainThread) {
         mDiskIO = diskIO;
@@ -54,7 +54,7 @@ public class AppExecutors {
 
     private static class MainThreadExecutor implements Executor {
 
-        private Handler handler = new Handler(Looper.getMainLooper());
+        private final Handler handler = new Handler(Looper.getMainLooper());
 
         @Override
         public void execute(Runnable runnable) {

@@ -44,7 +44,7 @@ public class FileDigest {
         }
         MessageDigest digest = null;
         FileInputStream in = null;
-        byte buffer[] = new byte[2048];
+        byte[] buffer = new byte[2048];
         int read;
         try {
             digest = MessageDigest.getInstance("MD5");

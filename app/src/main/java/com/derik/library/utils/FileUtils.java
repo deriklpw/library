@@ -24,7 +24,7 @@ public class FileUtils {
         }
 
         List<String> list = null;
-        File files[] = dir.listFiles();
+        File[] files = dir.listFiles();
 
         if (files != null && files.length > 0) {
             list = new ArrayList<>();
@@ -49,7 +49,7 @@ public class FileUtils {
     public static boolean compare(File localFile, File tarFile) {
         String cmpFileMD5 = FileDigest.getFileMD5(localFile);
         String tarFileMD5 = FileDigest.getFileMD5(tarFile);
-        return cmpFileMD5 != null && tarFileMD5 != null && cmpFileMD5.equals(tarFileMD5);
+        return cmpFileMD5 != null && cmpFileMD5.equals(tarFileMD5);
     }
 
     /**

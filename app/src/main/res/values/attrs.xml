@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="SettingItemView">
+        <attr name="settingType">
+            <enum name="textAndIndicator" value="0" />
+            <enum name="switchOnly" value="1" />
+            <enum name="textOnly" value="2" />
+        </attr>
+        <attr name="settingName" format="string|reference" />
+        <attr name="settingDesc" format="string|reference" />
+        <attr name="settingNameSize" format="dimension|reference" />
+        <attr name="settingDescSize" format="dimension|reference" />
+        <attr name="settingNameColor" format="color|reference" />
+        <attr name="settingDescColor" format="color|reference" />
+        <attr name="settingDividerEnable" format="boolean" />
+        <attr name="settingDividerColor" format="color|reference" />
+        <attr name="settingDividerWidth" format="dimension|reference" />
+        <attr name="settingDescMarginLeft" format="dimension|reference" />
+        <attr name="settingIndicatorDrawable" format="reference" />
+        <attr name="settingIndicatorDrawablePadding" format="reference" />
+        <attr name="settingDescPosition">
+            <enum name="right" value="0" />
+            <enum name="afterName" value="1" />
+        </attr>
+        <attr name="settingNameMarginLeft" format="dimension|reference" />
+        <attr name="settingIndicatorMarginRight" format="dimension|reference" />
+        <attr name="settingSwitchMarginRight" format="dimension|reference" />
+        <attr name="settingSwitchChecked" format="boolean" />
+        <attr name="settingDividerMarginRight" format="dimension|reference" />
+        <attr name="settingDividerMarginLeft" format="dimension|reference" />
+
+        <!-- Tint to apply to the background. -->
+        <attr name="settingIndicatorDrawableTint" format="color" />
+
+        <!-- Blending mode used to apply the background tint. -->
+        <attr name="settingIndicatorDrawableTintMode">
+            <!-- The tint is drawn on top of the drawable.
+                 [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc] -->
+            <enum name="src_over" value="3" />
+            <!-- The tint is masked by the alpha channel of the drawable. The drawable’s
+                 color channels are thrown out. [Sa * Da, Sc * Da] -->
+            <enum name="src_in" value="5" />
+            <!-- The tint is drawn above the drawable, but with the drawable’s alpha
+                 channel masking the result. [Da, Sc * Da + (1 - Sa) * Dc] -->
+            <enum name="src_atop" value="9" />
+            <!-- Multiplies the color and alpha channels of the drawable with those of
+                 the tint. [Sa * Da, Sc * Dc] -->
+            <enum name="multiply" value="14" />
+            <!-- [Sa + Da - Sa * Da, Sc + Dc - Sc * Dc] -->
+            <enum name="screen" value="15" />
+            <!-- Combines the tint and drawable color and alpha channels, clamping the
+                 result to valid color values. Saturate(S + D) -->
+            <enum name="add" value="16" />
+        </attr>
+    </declare-styleable>
+
+</resources>

@@ -21,9 +21,8 @@ import java.util.List;
 public class TcpServer implements Runnable {
 
     private static final String TAG = "TcpServer";
-    private static TcpServer instance = new TcpServer();
-    private List<Socket> sockets = new ArrayList<>();
-    private ServerSocket serverSocket;
+    private static final TcpServer instance = new TcpServer();
+    private final List<Socket> sockets = new ArrayList<>();
     private Thread mThread;
     private Consumer<String> successListener;
     private Consumer<String> errorListener;
@@ -57,7 +56,7 @@ public class TcpServer implements Runnable {
     @Override
     public void run() {
         try {
-            serverSocket = new ServerSocket(0);
+            ServerSocket serverSocket = new ServerSocket(0);
             if (actionListener != null) {
                 actionListener.accept(serverSocket.getInetAddress().getHostAddress(),
                         serverSocket.getLocalPort());

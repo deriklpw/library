@@ -28,13 +28,13 @@ public class GridItemDivider extends RecyclerView.ItemDecoration {
 
     private boolean isRightEnable = true;
 
-    private Paint mPaint;
+    private final Paint mPaint;
 
     private RecyclerView.LayoutManager mLayoutManager;
 
     private int mChildCount;
 
-    private boolean mBgMode;
+    private final boolean mBgMode;
 
     public GridItemDivider(int dividerWidth, int color) {
         this(dividerWidth, color, false);

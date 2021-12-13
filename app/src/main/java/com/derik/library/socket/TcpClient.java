@@ -17,8 +17,8 @@ public class TcpClient {
     private Socket socket;
     private BufferedReader bread = null;
     private BufferedWriter bwrite = null;
-    private String mIp;
-    private int mPort;
+    private final String mIp;
+    private final int mPort;
 
     private Consumer<String> success;
     private Consumer<String> error;

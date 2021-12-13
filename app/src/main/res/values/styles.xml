@@ -35,4 +35,11 @@
     </style>
 
     <color name="transparent">#00000000</color>
+
+    <style name="CommonSettingItemView">
+        <item name="settingNameColor">@android:color/black</item>
+        <item name="settingNameSize">34sp</item>
+        <item name="settingDescColor">@android:color/darker_gray</item>
+        <item name="settingDescSize">32sp</item>
+    </style>
 </resources>
