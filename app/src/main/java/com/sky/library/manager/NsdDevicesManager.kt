@@ -165,7 +165,7 @@ class NsdDevicesManager private constructor(context: Context) {
         resolvedMap.values.forEach {
             list.add(
                 DeviceInfo(
-                    it.serviceName, it.host.hostAddress.substringAfter("/")
+                    it.serviceName, it.host?.hostAddress?.substringAfter("/") ?: ""
                 )
             )
         }
