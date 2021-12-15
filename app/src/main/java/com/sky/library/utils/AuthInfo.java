@@ -41,7 +41,7 @@ public class AuthInfo {
             } catch (Exception e) {
                 e.printStackTrace();
                 String message = "请在AndroidManifest.xml中配置APP_ID, API_KEY 和 SECRET_KEY";
-                Log.e(TAG, message);
+                LogUtil.e(TAG, message);
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show();
                 return null;
             }

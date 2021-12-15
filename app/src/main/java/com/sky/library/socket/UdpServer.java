@@ -1,8 +1,8 @@
 package com.sky.library.socket;
 
-import com.sky.library.view.BiConsumer;
-import com.sky.library.view.Consumer;
-import com.sky.library.utils.Log;
+import com.sky.library.listener.BiConsumer;
+import com.sky.library.listener.Consumer;
+import com.sky.library.utils.LogUtil;
 
 import java.net.DatagramPacket;
 import java.net.InetAddress;
@@ -110,7 +110,7 @@ public class UdpServer {
                         byte data[] = msg.getBytes("utf-8");
                         packet = new DatagramPacket(data, data.length, toGroup, port);
                         sendSocket.send(packet);
-                        Log.d(TAG, "run: send by udp, msg=" + msg);
+                        LogUtil.d(TAG, "run: send by udp, msg=" + msg);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -124,7 +124,7 @@ public class UdpServer {
      * 开启UDP服务，开始接收UDP消息，并且可以发送消息
      */
     public synchronized void startServer() {
-        Log.d(TAG, "startServer: ");
+        LogUtil.d(TAG, "startServer: ");
         if (!isRunning) {
             isRunning = true;
             new Thread(new UdpServerRunnable()).start();
@@ -135,7 +135,7 @@ public class UdpServer {
      * 关闭UDP服务，结束UDP消息接收，并且无法发送消息
      */
     public synchronized void stopServer() {
-        Log.d(TAG, "stopServer: ");
+        LogUtil.d(TAG, "stopServer: ");
         isRunning = false;
     }
 
@@ -156,7 +156,7 @@ public class UdpServer {
         public void run() {
             while (isRunning) {
                 try {
-                    Log.d(TAG, "run: ready");
+                    LogUtil.d(TAG, "run: ready");
                     byte[] data = new byte[1024];
                     DatagramPacket packet = new DatagramPacket(data, data.length, fromGroup, port);
                     receiveSocket.receive(packet);
@@ -168,7 +168,7 @@ public class UdpServer {
                             success.accept(ip, message);
                         }
                     }
-                    Log.d(TAG, "run:from udp host=" + ip + ", from udp port=" + packet.getPort() + ", receive message=" + message);
+                    LogUtil.d(TAG, "run:from udp host=" + ip + ", from udp port=" + packet.getPort() + ", receive message=" + message);
                 } catch (Exception e) {
                     isRunning = false;
                     receiveSocket.close();

@@ -1,4 +1,4 @@
-package com.sky.library.view;
+package com.sky.library.listener;
 
 import android.view.View;
 
@@ -12,7 +12,7 @@ public abstract class NoDoubleClickListener implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Long currentClickTime = System.currentTimeMillis();
+        long currentClickTime = System.currentTimeMillis();
 
         if ((currentClickTime - lastClickTime) >= MIN_CLICK_DELAY_TIME) {
             lastClickTime = currentClickTime;

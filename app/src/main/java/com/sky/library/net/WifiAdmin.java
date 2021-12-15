@@ -8,7 +8,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.text.TextUtils;
 
-import com.sky.library.utils.Log;
+import com.sky.library.utils.LogUtil;
 
 import java.util.List;
 
@@ -120,7 +120,7 @@ public class WifiAdmin {
             try {
                 // 打开wifi
                 openWifi();
-                Log.i("open wifi", "opened");
+                LogUtil.i("open wifi", "opened");
 
                 Thread.sleep(200);
 
@@ -137,7 +137,7 @@ public class WifiAdmin {
                         type);
 
                 if (wifiConfig == null) {
-                    Log.i("wifi cfg", "wifiConfig is null!");
+                    LogUtil.i("wifi cfg", "wifiConfig is null!");
                     return;
                 }
 
@@ -150,14 +150,14 @@ public class WifiAdmin {
                 int netID = wifiManager.addNetwork(wifiConfig);
                 boolean enabled = wifiManager.enableNetwork(netID, true);
 
-                Log.i("isEnable", "" + enabled);
+                LogUtil.i("isEnable", "" + enabled);
                 boolean connected = wifiManager.reconnect();
-                Log.i("isReconnect", "" + connected);
-                Log.i("success", "连接成功!");
+                LogUtil.i("isReconnect", "" + connected);
+                LogUtil.i("success", "连接成功!");
 
             } catch (Exception e) {
                 // TODO: handle exception
-                Log.e("wifi",  "connect error: " +e.getMessage());
+                LogUtil.e("wifi",  "connect error: " +e.getMessage());
                 e.printStackTrace();
             }
         }

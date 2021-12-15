@@ -1,8 +1,8 @@
 package com.sky.library.socket;
 
-import com.sky.library.view.BiConsumer;
-import com.sky.library.view.Consumer;
-import com.sky.library.utils.Log;
+import com.sky.library.listener.BiConsumer;
+import com.sky.library.listener.Consumer;
+import com.sky.library.utils.LogUtil;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -62,10 +62,10 @@ public class TcpServer implements Runnable {
                         serverSocket.getLocalPort());
             }
             while (true) {
-                Log.d(TAG, "run: ThreadId=" + Thread.currentThread().getId());
+                LogUtil.d(TAG, "run: ThreadId=" + Thread.currentThread().getId());
                 Socket socket = serverSocket.accept();
                 sockets.add(socket);
-                Log.d(TAG, "run: socket size=" + sockets.size());
+                LogUtil.d(TAG, "run: socket size=" + sockets.size());
                 new Thread(new TcpServerRunnable(socket)).start();
                 if (!isRunning) {
                     serverSocket.close();
@@ -76,7 +76,7 @@ public class TcpServer implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            Log.d(TAG, "TCP server run: finally");
+            LogUtil.d(TAG, "TCP server run: finally");
         }
     }
 
@@ -86,7 +86,7 @@ public class TcpServer implements Runnable {
      * @param actionListener 状态监听器，开启成功后，将对应信息返回给接口方法
      */
     public void startServer(BiConsumer<String, Integer> actionListener) {
-        Log.d(TAG, "startServer: ");
+        LogUtil.d(TAG, "startServer: ");
         if (!isRunning) {
             isRunning = true;
             this.actionListener = actionListener;
@@ -99,7 +99,7 @@ public class TcpServer implements Runnable {
      * 停止TCP服务
      */
     public void stopServer() {
-        Log.d(TAG, "stopServer: ");
+        LogUtil.d(TAG, "stopServer: ");
         isRunning = false;
         if (mThread != null) {
             mThread = null;
@@ -138,16 +138,16 @@ public class TcpServer implements Runnable {
                     if (result.length() >= 5) {
                         result = result.substring(0, result.length() - 5);
                     }
-                    Log.d(TAG, "run: receive length=" + result.length());
+                    LogUtil.d(TAG, "run: receive length=" + result.length());
 
                     if (successListener != null) {
                         successListener.accept(result);
                     }
                     String reply = "TCP Server reply, success.";
-                    Log.d(TAG, "run: write length=" + reply);
+                    LogUtil.d(TAG, "run: write length=" + reply);
                     bwrite.write(reply + "#eof#");
                     bwrite.flush();
-                    Log.d(TAG, "run: go to sleep 500");
+                    LogUtil.d(TAG, "run: go to sleep 500");
                     Thread.sleep(500);
                 }
 
@@ -158,7 +158,7 @@ public class TcpServer implements Runnable {
                     errorListener.accept("tcp error");
                 }
             } finally {
-                Log.d(TAG, "TcpServerRunnable run: finally");
+                LogUtil.d(TAG, "TcpServerRunnable run: finally");
             }
 
         }

@@ -1,7 +1,7 @@
 package com.sky.library.socket;
 
-import com.sky.library.view.Consumer;
-import com.sky.library.utils.Log;
+import com.sky.library.listener.Consumer;
+import com.sky.library.utils.LogUtil;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -71,7 +71,7 @@ public class TcpClient {
                         bread = new BufferedReader(new InputStreamReader(socket.getInputStream(), "utf-8"));
                     }
 
-                    Log.d(TAG, "run: write length=" + msg.length());
+                    LogUtil.d(TAG, "run: write length=" + msg.length());
                     bwrite.write(msg + "#eof#");
                     bwrite.flush();
 
@@ -88,7 +88,7 @@ public class TcpClient {
                     if (result.length() >= 5) {
                         result = result.substring(0, result.length() - 5);
                     }
-                    Log.d(TAG, "run: receive length=" + result.length());
+                    LogUtil.d(TAG, "run: receive length=" + result.length());
 
                     if (success != null) {
                         success.accept(result);

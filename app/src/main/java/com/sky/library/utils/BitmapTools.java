@@ -61,7 +61,7 @@ public class BitmapTools {
      */
     public int getMaxMemory() {
         int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
-        Log.d("TAG", "Max memory is " + maxMemory + "KB");
+        LogUtil.d("TAG", "Max memory is " + maxMemory + "KB");
         return maxMemory;
     }
 
@@ -93,7 +93,7 @@ public class BitmapTools {
             // 一定都会大于等于目标的宽和高。
             inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
         }
-        Log.d("inSampleSize", "" + inSampleSize);
+        LogUtil.d("inSampleSize", "" + inSampleSize);
         return inSampleSize;
     }
 
@@ -125,7 +125,7 @@ public class BitmapTools {
             // 一定都会大于等于目标的宽和高。
             inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
         }
-        Log.d("inSampleSize", "" + inSampleSize);
+        LogUtil.d("inSampleSize", "" + inSampleSize);
         return inSampleSize;
     }
 

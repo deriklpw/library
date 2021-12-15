@@ -25,35 +25,35 @@ public class SDCardTest {
                 break;
             case Environment.MEDIA_MOUNTED_READ_ONLY:
                 state = 0;
-                Log.e("", "MEDIA_MOUNTED_READ_ONLY");
+                LogUtil.e("", "MEDIA_MOUNTED_READ_ONLY");
                 break;
             case Environment.MEDIA_NOFS:
                 state = 0;
-                Log.e("", "MEDIA_NOFS");
+                LogUtil.e("", "MEDIA_NOFS");
                 break;
             case Environment.MEDIA_SHARED:
                 state = 0;
-                Log.e("", "MEDIA_SHARED");
+                LogUtil.e("", "MEDIA_SHARED");
                 break;
             case Environment.MEDIA_CHECKING:
                 state = 0;
-                Log.e("", "MEDIA_CHECKING");
+                LogUtil.e("", "MEDIA_CHECKING");
                 break;
             case Environment.MEDIA_BAD_REMOVAL:
                 state = 0;
-                Log.e("", "MEDIA_BAD_REMOVAL");
+                LogUtil.e("", "MEDIA_BAD_REMOVAL");
                 break;
             case Environment.MEDIA_UNMOUNTABLE:
                 state = 0;
-                Log.e("", "MEDIA_UNMOUNTABLE");
+                LogUtil.e("", "MEDIA_UNMOUNTABLE");
                 break;
             case Environment.MEDIA_UNMOUNTED:
                 state = 0;
-                Log.e("", "MEDIA_UNMOUNTED");
+                LogUtil.e("", "MEDIA_UNMOUNTED");
                 break;
             case Environment.MEDIA_REMOVED:
                 state = 0;
-                Log.e("", "MEDIA_REMOVED");
+                LogUtil.e("", "MEDIA_REMOVED");
                 break;
         }
         return state;

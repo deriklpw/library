@@ -67,9 +67,9 @@ object FileUtils {
             val fileDir = File(path)
             if (!fileDir.exists()) {
                 if (fileDir.mkdirs()) {
-                    Log.i("ExternalPath", fileDir.absolutePath)
+                    LogUtil.i("ExternalPath", fileDir.absolutePath)
                 } else {
-                    Log.e("ExternalPath", "$path make failed!")
+                    LogUtil.e("ExternalPath", "$path make failed!")
                 }
             }
             val targetFile = File(
@@ -79,19 +79,19 @@ object FileUtils {
             try {
                 if (targetFile.exists()) {
                     if (!targetFile.delete()) {
-                        Log.e("File", "Delete failed:" + targetFile.absolutePath)
+                        LogUtil.e("File", "Delete failed:" + targetFile.absolutePath)
                     } else {
-                        Log.i("File", "Deleted " + targetFile.absolutePath)
+                        LogUtil.i("File", "Deleted " + targetFile.absolutePath)
                     }
                 }
                 if (targetFile.createNewFile()) {
-                    Log.i("File", "Created" + targetFile.absolutePath)
+                    LogUtil.i("File", "Created" + targetFile.absolutePath)
                 } else {
-                    Log.e("File", "Create failed:" + targetFile.absolutePath)
+                    LogUtil.e("File", "Create failed:" + targetFile.absolutePath)
                 }
             } catch (e: IOException) {
                 e.printStackTrace()
-                Log.e("File", "Create failed:" + targetFile.absolutePath)
+                LogUtil.e("File", "Create failed:" + targetFile.absolutePath)
             }
             return targetFile
         }

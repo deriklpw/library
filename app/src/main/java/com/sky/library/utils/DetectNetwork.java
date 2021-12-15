@@ -84,10 +84,10 @@ public class DetectNetwork {
 
                     } catch (Exception ex) {
                         counts++;
-                        Log.e("Url test", "url is unavailable, retry:" + counts);
+                        LogUtil.e("Url test", "url is unavailable, retry:" + counts);
 
                     } finally {
-                        Log.i("State", "" + state);
+                        LogUtil.i("State", "" + state);
                         httpUrlConnection.disconnect();
                         if (callback != null) {
                             callback.success(false);

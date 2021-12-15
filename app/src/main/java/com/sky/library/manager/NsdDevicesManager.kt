@@ -5,7 +5,7 @@ import android.net.nsd.NsdManager
 import android.net.nsd.NsdServiceInfo
 import android.os.Handler
 import android.os.Looper
-import com.sky.library.utils.Log
+import com.sky.library.utils.LogUtil
 import java.io.Serializable
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.ConcurrentLinkedQueue
@@ -48,26 +48,26 @@ class NsdDevicesManager private constructor(context: Context) {
     private fun initDiscoverListener() {
         discoveryListener = object : NsdManager.DiscoveryListener {
             override fun onStartDiscoveryFailed(serviceType: String?, errorCode: Int) {
-                Log.d("ShadowManager", "onStartDiscoveryFailed type=$serviceType")
+                LogUtil.d("ShadowManager", "onStartDiscoveryFailed type=$serviceType")
                 searchListener?.onError(Throwable("Start Discovery Failed"))
                 stopDiscovery()
             }
 
             override fun onStopDiscoveryFailed(serviceType: String?, errorCode: Int) {
-                Log.d("ShadowManager", "onStopDiscoveryFailed type=$serviceType")
+                LogUtil.d("ShadowManager", "onStopDiscoveryFailed type=$serviceType")
                 nsdManager.stopServiceDiscovery(this)
             }
 
             override fun onDiscoveryStarted(serviceType: String?) {
-                Log.d("ShadowManager", "onDiscoveryStarted type=$serviceType")
+                LogUtil.d("ShadowManager", "onDiscoveryStarted type=$serviceType")
             }
 
             override fun onDiscoveryStopped(serviceType: String?) {
-                Log.d("ShadowManager", "onDiscoveryStopped type=$serviceType")
+                LogUtil.d("ShadowManager", "onDiscoveryStopped type=$serviceType")
             }
 
             override fun onServiceFound(serviceInfo: NsdServiceInfo?) {
-                Log.d("ShadowManager", "onServiceFound info=$serviceInfo")
+                LogUtil.d("ShadowManager", "onServiceFound info=$serviceInfo")
                 serviceInfo?.also {
                     if (isResolveBusy.compareAndSet(false, true)) {
                         nsdManager.resolveService(it, resolverListener)
@@ -78,7 +78,7 @@ class NsdDevicesManager private constructor(context: Context) {
             }
 
             override fun onServiceLost(lostInfo: NsdServiceInfo?) {
-                Log.d(
+                LogUtil.d(
                     "ShadowManager",
                     "onServiceLost info=$lostInfo, isBusy=${isResolveBusy.get()}"
                 )
@@ -134,10 +134,10 @@ class NsdDevicesManager private constructor(context: Context) {
     private fun resolveNextInQueue() {
         val nextNsdService = pendingServices.poll()
         if (nextNsdService != null) {
-            Log.d("ShadowManager", "resolveNextInQueue, service=$nextNsdService")
+            LogUtil.d("ShadowManager", "resolveNextInQueue, service=$nextNsdService")
             nsdManager.resolveService(nextNsdService, resolverListener)
         } else {
-            Log.d("ShadowManager", "resolveNextInQueue, empty")
+            LogUtil.d("ShadowManager", "resolveNextInQueue, empty")
             isResolveBusy.set(false)
         }
     }
@@ -145,7 +145,7 @@ class NsdDevicesManager private constructor(context: Context) {
     private fun initResolveListener() {
         resolverListener = object : NsdManager.ResolveListener {
             override fun onResolveFailed(info: NsdServiceInfo?, errorCode: Int) {
-                Log.d("ShadowManager", "onResolveFailed, code= ${errorCode}, info=$info")
+                LogUtil.d("ShadowManager", "onResolveFailed, code= ${errorCode}, info=$info")
                 resolveNextInQueue()
             }
 
@@ -153,7 +153,7 @@ class NsdDevicesManager private constructor(context: Context) {
                 info?.also {
                     resolvedMap[it.serviceName] = it
                 }
-                Log.d("ShadowManager", "onServiceResolved, info=$info")
+                LogUtil.d("ShadowManager", "onServiceResolved, info=$info")
                 updateResult()
                 resolveNextInQueue()
             }
