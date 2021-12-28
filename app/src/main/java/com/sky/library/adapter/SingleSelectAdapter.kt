@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 
-abstract class SingleSelectAdapter<T, VH : RecyclerView.ViewHolder>(layoutId: Int, list: List<T>) : CustomBaseAdapter<T, VH>(layoutId, list) {
+abstract class SingleSelectAdapter<T, VH : RecyclerView.ViewHolder>(layoutId: Int, list: List<T?>) : CustomBaseAdapter<T, VH>(layoutId, list) {
     var currentPos = -1
         private set
     private var previousPos = -1
-    private var selectedListener: OnItemSelectedListener<T>? = null
+    private var selectedListener: OnItemSelectedListener<T?>? = null
     private var unSelectedColor = Color.TRANSPARENT
     private var selectedColor = Color.TRANSPARENT
     private var unSelectedDrawable: Drawable? = null
@@ -26,7 +26,7 @@ abstract class SingleSelectAdapter<T, VH : RecyclerView.ViewHolder>(layoutId: In
         }
     }
 
-    fun setOnItemSelectedListener(listener: OnItemSelectedListener<T>?) {
+    fun setOnItemSelectedListener(listener: OnItemSelectedListener<T?>?) {
         selectedListener = listener
     }
 
@@ -43,8 +43,8 @@ abstract class SingleSelectAdapter<T, VH : RecyclerView.ViewHolder>(layoutId: In
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         val result = super.onCreateViewHolder(parent, viewType)
         //Set the on item click again
-        setOnItemClickListener(object : OnItemClickListener<T> {
-            override fun onItemClick(view: View?, t: T, position: Int) {
+        setOnItemClickListener(object : OnItemClickListener<T?> {
+            override fun onItemClick(view: View?, t: T?, position: Int) {
                 selectedListener?.apply {
                     onItemSelected(view, t, position)
                 }
@@ -75,6 +75,6 @@ abstract class SingleSelectAdapter<T, VH : RecyclerView.ViewHolder>(layoutId: In
     }
 
     interface OnItemSelectedListener<T> {
-        fun onItemSelected(view: View?, t: T, position: Int)
+        fun onItemSelected(view: View?, t: T?, position: Int)
     }
 }
