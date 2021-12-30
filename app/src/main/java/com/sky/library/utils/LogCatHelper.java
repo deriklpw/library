@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 /**
  * log打印日志保存,文件的保存以小时为单位
@@ -130,12 +131,12 @@ public class LogCatHelper {
     private static class FormatDate {
 
         public static String getFormatDate() {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHH");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHH", Locale.getDefault());
             return sdf.format(System.currentTimeMillis());
         }
 
         public static String getFormatTime() {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
             return sdf.format(System.currentTimeMillis());
         }
     }
